@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+
 // ==> Rotas da API:
 const index = require('./routes/index');
+
 // const productRoute = require('./routes/product.routes');
 
 app.use(express.urlencoded({ extended: true }));
