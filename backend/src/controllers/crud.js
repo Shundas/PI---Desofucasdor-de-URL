@@ -1,11 +1,11 @@
-const express = require('express');
-const app = express();
-const { user } = require('../app/models');
+const User = require('../models/user');
 
-app.get("/", (req, res) => {
-    res.send("Tela de Crud");
-});
+module.exports = {
+    async store(req, res) {
+        const { name, email, senha } = req.body;
+        
+        const user = await User.create({ name, email, senha });
 
-user.create({ name: 'Claudio', email: 'claudio@rocketseat.com.br', password: '123456' });
-
-module.exports = app;
+        return res.json(user);
+    }
+}
