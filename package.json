@@ -1,0 +1,23 @@
+{
+  "name": "PI---Desofucasdor-de-URL",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shundas/PI---Desofucasdor-de-URL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shundas/PI---Desofucasdor-de-URL/issues"
+  },
+  "homepage": "https://github.com/Shundas/PI---Desofucasdor-de-URL#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
