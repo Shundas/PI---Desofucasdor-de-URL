@@ -1,4 +1,5 @@
 const router = require('express').Router();
+import express from 'express';
 
 router.get('/', (req, res) => {
     res.send('<h1>Login</h1>')
