@@ -2,15 +2,28 @@ import knex from '../database/index'
 
 class userController {
     async create(request, response) {
-        const {
-            name,
-            email,
-            senha
-        } = request.body
+        try {
+            const {
+                name,
+                email,
+                senha
+            } = request.body
+    
+            const trx = await knex.transaction()
 
-        const trx = await knex.transaction()
+            await knex('users').insert({
+                name,
+                email,
+                senha
+            })
 
-        
+            return console.log(response.json())
+            
+        } catch (error) {
+            
+        }
+
+
 
 
     }
