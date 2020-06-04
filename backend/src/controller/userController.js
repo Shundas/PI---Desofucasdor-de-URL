@@ -1,9 +1,9 @@
-import knex from '../database/index'
+const knex = require('../database/index')
 
-class userController {
+module.exports = {
     async create(request, response) {
         try {
-            const {
+            const dados = {
                 name,
                 email,
                 senha
@@ -17,14 +17,10 @@ class userController {
                 senha
             })
 
-            return console.log(response.json())
+            return response.json(dados)
             
         } catch (error) {
             
         }
-
-
-
-
     }
 }
