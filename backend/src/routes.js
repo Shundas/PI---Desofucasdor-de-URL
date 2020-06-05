@@ -7,19 +7,19 @@ router.get('/', (req, res) => {
     res.send('<h1>Login</h1>')
 });
 
-router.get('/:id', (req, res) => {
+router.get('/app/:id', (req, res) => {
     res.send(`<h1>Detalhes do usuário ${req.params.id}</h1>`);
 });
 
-router.post('/', userController.create)
+router.post('/app/', userController.create)
 
-router.get('/', userController.index)
+router.get('/app/', userController.index)
 
-router.put('/:id', (req, res) => {
+router.put('/app/:id', (req, res) => {
     res.send(`<h1>Editar usuário ${req.params.id}</h1>`);
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/app/:id', (req, res) => {
     res.send(`<h1>Deletar usuário ${req.params.id}</h1>`);
 });
 
