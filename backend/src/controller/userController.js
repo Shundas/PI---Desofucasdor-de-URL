@@ -11,7 +11,7 @@ module.exports = {
     
             const trx = await knex.transaction()
 
-            await trx('users').insert({
+            await knex('users').insert({
                 name,
                 email,
                 senha
