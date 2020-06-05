@@ -11,7 +11,7 @@ module.exports = {
     
             const trx = await knex.transaction()
 
-            await knex('users').insert({
+            await trx('users').insert({
                 name,
                 email,
                 senha
@@ -22,5 +22,10 @@ module.exports = {
         } catch (error) {
             
         }
+    },
+
+    async index(request, response) {
+        const results = await knex.select('*')
+        return response.json(results)
     }
 }

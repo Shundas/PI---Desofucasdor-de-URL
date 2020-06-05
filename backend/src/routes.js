@@ -13,6 +13,8 @@ router.get('/user_details/:id', (req, res) => {
 
 router.post('/new_user', userController.create)
 
+router.get('/lista_user', userController.index)
+
 router.put('/edit_user/:id', (req, res) => {
     res.send(`<h1>Editar usuário ${req.params.id}</h1>`);
 });
