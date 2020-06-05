@@ -3,23 +3,23 @@ const express = require('express');
 const userController = require('./controller/userController')
 
 
-router.get('/login', (req, res) => {
+router.get('/', (req, res) => {
     res.send('<h1>Login</h1>')
 });
 
-router.get('/user_details/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     res.send(`<h1>Detalhes do usuário ${req.params.id}</h1>`);
 });
 
-router.post('/new_user', userController.create)
+router.post('/', userController.create)
 
-router.get('/lista_user', userController.index)
+router.get('/', userController.index)
 
-router.put('/edit_user/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     res.send(`<h1>Editar usuário ${req.params.id}</h1>`);
 });
 
-router.delete('/delete_user/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     res.send(`<h1>Deletar usuário ${req.params.id}</h1>`);
 });
 
