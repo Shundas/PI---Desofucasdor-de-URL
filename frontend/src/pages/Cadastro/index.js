@@ -70,6 +70,16 @@ function Cadastro() {
 
                         />
                     </div>
+                    <div className="field">
+                        <label htmlFor="confSenha">Confirma Senha</label>
+                        <input 
+                            type="password"
+                            name="confSenha"
+                            id="confSenha"
+                            onChange={handleInputChange}
+
+                        />
+                    </div>
                 </fieldset>
 
                 <button type="submit">Cadastrar</button>

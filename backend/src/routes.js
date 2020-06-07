@@ -18,6 +18,8 @@ router.post('/app', [
     check('name', 'Nome é cmapo obrigatório').trim().escape().notEmpty(),
     check('email', 'E-mail é campo obrigatório').trim().escape().notEmpty().bail().isEmail().withMessage('E-mail inválido'),
     check('senha', 'Senha é campo obrigatório').trim().escape().notEmpty()],
+    check('confSenha','Confirmar senha é campo obrigatório.')
+    .trim().escape().notEmpty().bail().custom((value,{ req }) => value === req.body.senha).withMessage('Senhas não conferem.'),
     userController.create);
 
 
