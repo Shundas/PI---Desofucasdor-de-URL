@@ -1,71 +1,102 @@
-const knex = require('../database/index')
+const knex = require('../database/index');
+const { validationResult } = require('express-validator');
 
 module.exports = {
-    async create(request, response) {
+    //Criação do usuário com validação --OK
+    async create(request, response, next) {
         try {
+            const erros = validationResult(request);
             const dados = {
                 name,
                 email,
                 senha
             } = request.body
-    
-            await knex('users').insert({
-                name,
-                email,
-                senha
-            })
-
-            return response.json(dados)
+            const results = {
+                dados,
+                erros: erros.array()
+            }
+            if (!erros.isEmpty()) {
+                return response.status(422).json(results)
+            } else {
+                await knex('users').insert({
+                    name,
+                    email,
+                    senha
+                })
+                return response.json(dados)    
+            }
             
         } catch (error) {
-            
+            next(error)
         }
     },
 
+    //Alteração do usuário com validação --OK
     async update(request, response,  next){
         try{
+            const erros = validationResult(request);
             const { email, name } = request.body
             const { id } = request.params
 
-            await knex('users').update({ email, name }).where({ id })
-
-            return response.send()
-
+            const results = {
+                id,
+                name,
+                email,
+                erros: erros.array()
+            }
+            if (!erros.isEmpty()) {
+                return response.status(422).json(results)
+            } else {
+                if(results.name === "") { 
+                    await knex('users').update({ email }).where({ id })
+                } else if(results.email === "") {
+                    await knex('users').update({ name }).where({ id })
+                } else {
+                    await knex('users').update({ email, name }).where({ id })
+                }
+                return response.json(results)
+            }
         }catch (error){
-
+            next(error)
         }
     },
 
-    async delete(request, response, next){
+    // Delete de usuário com validação --OK
+    async delete(request, response, next ){
         try{
-
             const { id } = request.params
+            const delete_id = await knex('users').where({ id }).del()
 
-            await knex('users').where({ id }).del()
-
-            return response.send()
-
+            if(!delete_id) {
+                return response.status(400).json({ message: "Usuário não encontrado" })
+            } else{
+                return response.json({ msg: 'Usuário deletado'})
+            }
         }catch(error){
-
+            next(error)
         }
     },
 
+    //Buscar todos usuários --OK
     async index(request, response) {
         const results = await knex.select('*').from('users')
         return response.json(results)
     },
 
+    //Buscar usuário específico --Verificar
     async show(request, response, next) {
         try{
-
-            const { name } = request.body
-
-            const result = await knex('users').where('name', 'like', `%${name}%`)
-
-            return response.json(result)
+            const { name } = request.query
+            const pesquisaUser = await knex('users').where('name', 'like', `%${name}%`)
+            
+            if(!pesquisaUser) {
+                return response.json({ msg: "Usuário não encontrado" }) //verificar
+            } else{
+                return response.json(pesquisaUser)
+            }
 
         }catch(error){
-
+            next(error)
         }
     }
 }
