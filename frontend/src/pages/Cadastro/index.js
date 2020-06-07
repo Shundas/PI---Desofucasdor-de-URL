@@ -31,7 +31,7 @@ function Cadastro() {
     return (
        <> 
             <header>Header do Cadastro</header>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h1>Cadastro de Usuário</h1>
 
                 <fieldset>
@@ -72,7 +72,7 @@ function Cadastro() {
                     </div>
                 </fieldset>
 
-                <button type="submit" onClick={handleSubmit}>Cadastrar</button>
+                <button type="submit">Cadastrar</button>
             </form>
         </>
 
