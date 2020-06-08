@@ -16,24 +16,36 @@ export default function Lista() {
         })
     },[])
 
+    function handleDeleteUser(id) {
+       api.delete(`/${id}`);
+       alert('Usuário Deletado')
+    }
+
     return (
         <>
-        <header>Header</header>
-        <div>
-           <table>
-            {users.map(user => (
-                <tr  key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <Link to={`/editar/${user.id}`}>
-                        <button>Editar</button>
-                    </Link>
-                    <button>Excluir</button>
-                </tr>
-                ))}
-            </table>
-        </div>
+            <header>Header</header>
+            <div>
+            <table>
+                <tbody>
+                    {users.map(user => (
+                        <tr  key={user.id}>
+                            <td>{user.id}</td>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <Link to={`/editar/${user.id}`}>
+                                <button>Editar</button>
+                            </Link>
+                            <button 
+                                id={user.id} 
+                                onClick={() => handleDeleteUser(user.id)}
+                            >
+                            Excluir
+                            </button>
+                        </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }
