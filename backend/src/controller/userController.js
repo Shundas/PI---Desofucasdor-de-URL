@@ -48,11 +48,12 @@ module.exports = {
                 return response.status(422).json(results)
             } else {
                 if(results.name === "") { 
-                    await knex('users').update({ email }).where({ id })
+                    await knex('users').update('email', email).where('id', id)
                 } else if(results.email === "") {
-                    await knex('users').update({ name }).where({ id })
+                    await knex('users').update('name', name).where('id', id)
                 } else {
-                    await knex('users').update({ email, name }).where({ id })
+                    await knex('users').update('email', email).where('id', id)
+                    await knex('users').update('name', name).where('id', id)
                 }
                 return response.json(results)
             }
