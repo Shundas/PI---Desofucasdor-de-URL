@@ -1,0 +1,22 @@
+div.center {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 145px;
+  padding: 20px;
+}
+
+div.center > .back {
+  font-size: 3em;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+div.center > .back:hover {
+  opacity: 1;
+  transition: 0.7s;
+  color: #e12;
+}
