@@ -80,7 +80,7 @@ module.exports = {
 
     //Buscar todos usuários --OK
     async index(request, response) {
-        const results = await knex.select('*').from('users')
+        const results = await knex.select('*').from('users').orderBy('id')
         return response.json(results)
     },
 
