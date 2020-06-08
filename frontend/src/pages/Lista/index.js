@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api'
+import { Link } from 'react-router-dom';
+
 
 export default function Lista() {
     const [users, setUsers] = useState([{
@@ -15,16 +17,23 @@ export default function Lista() {
     },[])
 
     return (
+        <>
+        <header>Header</header>
         <div>
-           <ul>
+           <table>
             {users.map(user => (
-                <li  key={user.id}>
-                    <span>{user.email}</span>
-                    <br />
-                    <span>{user.name}</span>
-                </li>
+                <tr  key={user.id}>
+                    <td>{user.id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <Link to={`/editar/${user.id}`}>
+                        <button>Editar</button>
+                    </Link>
+                    <button>Excluir</button>
+                </tr>
                 ))}
-            </ul>
+            </table>
         </div>
+        </>
     )
 }

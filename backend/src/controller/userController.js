@@ -98,5 +98,22 @@ module.exports = {
         }catch(error){
             next(error)
         }
+    },
+
+    // buscando unico user -- pelo ID
+    async unique(request, response, next) {
+        try{
+            const { id } = request.params;
+            const pesquisaUserUnico = await knex('users').where('id', id).first();
+            
+            if(!pesquisaUserUnico) {
+                return response.json({ msg: "Usuário não encontrado" }) //verificar
+            } else{
+                return response.json(pesquisaUserUnico)
+            }
+
+        }catch(error){
+            next(error)
+        }
     }
 }
