@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../../services/api";
-import * as Yup from 'yup'
+import {Link} from 'react-router-dom'
+import { FiArrowLeft } from 'react-icons/fi';
 
 import './style.css'
 
@@ -35,6 +36,12 @@ function Cadastro() {
 
   return (
     <div id="page-cadastro">
+      <header>
+        <Link to='/'>
+          <FiArrowLeft />
+          Voltar para home
+        </Link>
+      </header>
       <form onSubmit={handleSubmit}>
         <h1>Cadastro de Usuário</h1>
         <fieldset>
