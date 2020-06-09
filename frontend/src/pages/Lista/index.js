@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import { FiArrowLeft } from 'react-icons/fi';
 
 export default function Lista() {
   const [users, setUsers] = useState([
@@ -27,8 +28,12 @@ export default function Lista() {
 
   return (
     <>
-      <header className="header">Lista de usuários</header>
+      <header className="header"><Link to='/'>
+          <FiArrowLeft />
+          Voltar para home
+        </Link></header>
       <div className="container">
+          <h1>Lista de usuários</h1>
         <table class="table">
           <tbody>
             <tr>
