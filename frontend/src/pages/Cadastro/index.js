@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import api from "../../services/api";
 import * as Yup from 'yup'
 
+import './style.css'
+
 function Cadastro() {
-  const formRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,11 +34,9 @@ function Cadastro() {
   }
 
   return (
-    <>
-      <header>Header do Cadastro</header>
-      <form ref={formRef} onSubmit={handleSubmit}>
+    <div id="page-cadastro">
+      <form onSubmit={handleSubmit}>
         <h1>Cadastro de Usuário</h1>
-
         <fieldset>
           <legend>
             <h2>Dados</h2>
@@ -84,7 +83,7 @@ function Cadastro() {
         </fieldset>
         <button type="submit">Cadastrar</button>
       </form>
-    </>
+    </div>
   );
 }
 
