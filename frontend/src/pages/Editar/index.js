@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
+import {Link} from 'react-router-dom'
+import { FiArrowLeft } from 'react-icons/fi';
 
+import './style.css'
 
 export default function Editar() {
     const { id } = useParams();
@@ -32,15 +35,20 @@ export default function Editar() {
         };
 
         await api.put(`/${id}`, data);
-
         alert('Usuário Editado')
     }
 
     
     return (
-        <>  
+        <div id="page-editar"> 
+        <header>
+            <Link to='/lista'>
+                <FiArrowLeft />
+                Voltar para Lista
+            </Link>
+        </header>
             <fieldset>
-                <legend>Editar usuário: {id}</legend>
+                <legend><h2>Editar usuário: {id}</h2></legend>
                 <form onSubmit={handleSubmit}>
                     <div className="field">
                         <label htmlFor="name">Nome</label>
@@ -66,6 +74,6 @@ export default function Editar() {
                     <button type="submit">Editar</button>
                 </form>
             </fieldset>
-        </>
+        </div>
     )
 }
