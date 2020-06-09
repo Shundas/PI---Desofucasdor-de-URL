@@ -4,16 +4,14 @@ import "./styles.css";
 
 export default function Home() {
   return (
-    <>
-      <div className="center">
-        <Link className="back" to="/cadastro">
-          Cadastro
-        </Link>{" "}
-        <br />
-        <Link className="back" to="/lista">
-          Lista de Usuários
+    <div id="page-home">
+        <Link to="/cadastro">
+          <button>Cadastro</button>
         </Link>
-      </div>
-    </>
+        <br />
+        <Link to="/lista">
+          <button>Lista</button>
+        </Link>
+    </div>
   );
 }

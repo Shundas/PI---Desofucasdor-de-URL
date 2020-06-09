@@ -1,25 +1,25 @@
-div.center {
+#page-home {
   width: 100%;
-  max-width: 1280px;
-  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#page-home button {
+  width: 200px;
+  height: 56px;
+  background: grey;
+  border-radius: 8px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 16px;
+  border: 0;
+  margin-top: 20px;
+  text-align: center;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 145px;
-  padding: 20px;
+  transition: background-color 0.2s;
+  cursor: pointer;
 }
 
-div.center > .back {
-  font-size: 3em;
-  text-decoration: none;
-  opacity: 0.8;
-  color: #2fb86e;
-  margin-bottom: 40px;
-}
-
-div.center > .back:hover {
-  opacity: 1;
-  transition: 0.7s;
-  color: #e12;
-  transform: rotate(10deg);
+#page-home button:hover {
+  background: #2FB86E;
 }
