@@ -27,16 +27,22 @@ export default function Lista() {
 
   return (
     <>
-      <header className="header">Header</header>
+      <header className="header">Lista de usuários</header>
       <div className="container">
-        <table>
+        <table class="table">
           <tbody>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Edição/Remoção</th>
+            </tr>
             {users.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <Link className="tolink" to={`/editar/${user.id}`}>
+                <td><Link className="tolink" to={`/editar/${user.id}`}>
                   <button>Editar</button>
                 </Link>
                 <button
@@ -46,6 +52,7 @@ export default function Lista() {
                 >
                   Excluir
                 </button>
+                </td>
               </tr>
             ))}
           </tbody>
