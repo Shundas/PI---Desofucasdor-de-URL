@@ -16,9 +16,11 @@ export default function Lista() {
         })
     },[])
 
-    function handleDeleteUser(id) {
-       api.delete(`/${id}`);
+    async function handleDeleteUser(id) {
+    //    alert('Você deseja realmente excluir esse usuário?'
+       await api.delete(`/${id}`);
        alert('Usuário Deletado')
+       window.location.reload()
     }
 
     return (

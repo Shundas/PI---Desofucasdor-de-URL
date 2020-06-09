@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import api from "../../services/api";
+import * as Yup from 'yup'
 
 function Cadastro() {
+  const formRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,8 +18,11 @@ function Cadastro() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
     const { name, email, senha, confSenha } = formData;
+
+    if(name === "") {
+        alert('O nome é obrigatório')
+    }
 
     const data = {
       name,
@@ -26,17 +31,15 @@ function Cadastro() {
       confSenha
     };
 
-      await api.post("/", data).then((response => {
-        console.log(response.data)
-      }))
-      alert("Usuário cadastrado")
+    await api.post("/", data)
+    alert("Usuário cadastrado")
 
   }
 
   return (
     <>
       <header>Header do Cadastro</header>
-      <form onSubmit={handleSubmit}>
+      <form ref={formRef} onSubmit={handleSubmit}>
         <h1>Cadastro de Usuário</h1>
 
         <fieldset>
@@ -83,7 +86,6 @@ function Cadastro() {
             />
           </div>
         </fieldset>
-
         <button type="submit">Cadastrar</button>
       </form>
     </>
