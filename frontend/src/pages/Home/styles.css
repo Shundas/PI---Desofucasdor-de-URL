@@ -13,10 +13,13 @@ div.center > .back {
   font-size: 3em;
   text-decoration: none;
   opacity: 0.8;
+  color: #2fb86e;
+  margin-bottom: 40px;
 }
 
 div.center > .back:hover {
   opacity: 1;
   transition: 0.7s;
   color: #e12;
+  transform: rotate(10deg);
 }

@@ -1,0 +1,41 @@
+header.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+div.container {
+  width: 100%;
+  max-width: 1800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 85px;
+}
+
+button.btn {
+  border: 0;
+  padding: 8px 18px;
+  background-color: gray;
+  margin-left: 10px;
+  border-radius: 8px;
+}
+
+button.btn:hover {
+  background-color: #2fb86e;
+  transition: 0.8s;
+}
+
+.tolink button {
+  border: 0;
+  padding: 8px 18px;
+  background-color: gray;
+  margin-left: 10px;
+  border-radius: 8px;
+}
+
+.tolink button:hover {
+  background-color: #2fb86e;
+  transition: 0.8s;
+}
