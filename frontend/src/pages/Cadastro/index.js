@@ -20,10 +20,6 @@ function Cadastro() {
     event.preventDefault();
     const { name, email, senha, confSenha } = formData;
 
-    if(name === "") {
-        alert('O nome é obrigatório')
-    }
-
     const data = {
       name,
       email,
