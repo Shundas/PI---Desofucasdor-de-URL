@@ -25,11 +25,9 @@ function Cadastro() {
       confSenha
     };
 
-    await api.post("/", data)
-      .then((response) => {
-      })
+      await api.post("/", data)
+      alert("Usuário cadastrado")
 
-    alert("Usuário cadastrado");
   }
 
   return (
