@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import api from "../../services/api";
-import { Link } from "react-router-dom";
 
 function Cadastro() {
-  const [erros, setErros] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     senha: "",
+    confSenha: "",
   });
 
   function handleInputChange(event) {
@@ -18,16 +17,17 @@ function Cadastro() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const { name, email, senha } = formData;
+    const { name, email, senha, confSenha } = formData;
     const data = {
       name,
       email,
       senha,
+      confSenha
     };
 
-    await api
-      .post("/", data)
-      .then((response) => console.log(response.data.erros));
+    await api.post("/", data)
+      .then((response) => {
+      })
 
     alert("Usuário cadastrado");
   }
@@ -50,7 +50,6 @@ function Cadastro() {
               name="name"
               id="name"
               onChange={handleInputChange}
-              {...erros.map((e) => console.log(e.msg))}
             />
           </div>
 

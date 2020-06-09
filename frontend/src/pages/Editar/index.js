@@ -8,7 +8,7 @@ export default function Editar() {
 
     const [userUpdate, setUserUpdate] = useState({
         name: '',
-        email: ''
+        email: '',
     })
 
     useEffect(() => {
@@ -23,7 +23,8 @@ export default function Editar() {
     }
 
     async function handleSubmit(event) {
-        
+        event.preventDefault();
+
         const { name, email } = userUpdate;
         const data = {
             name,
