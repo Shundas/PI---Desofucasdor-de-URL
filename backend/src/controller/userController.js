@@ -23,7 +23,7 @@ module.exports = {
                     email,
                     senha
                 })
-                return response.json(dados)    
+                return response.json(results)    
             }
             
         } catch (error) {

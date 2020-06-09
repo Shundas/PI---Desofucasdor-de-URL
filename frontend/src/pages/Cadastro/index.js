@@ -18,6 +18,7 @@ function Cadastro() {
     event.preventDefault();
 
     const { name, email, senha, confSenha } = formData;
+
     const data = {
       name,
       email,
@@ -25,7 +26,9 @@ function Cadastro() {
       confSenha
     };
 
-      await api.post("/", data)
+      await api.post("/", data).then((response => {
+        console.log(response.data)
+      }))
       alert("Usuário cadastrado")
 
   }
