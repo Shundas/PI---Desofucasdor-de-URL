@@ -6,6 +6,12 @@ import { FiArrowLeft } from 'react-icons/fi';
 import './style.css'
 
 function Cadastro() {
+  const [erros, setErros] = useState([
+    {
+      msg:"",
+    }
+  ])
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,6 +26,7 @@ function Cadastro() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     const { name, email, senha, confSenha } = formData;
 
     const data = {
@@ -30,9 +37,10 @@ function Cadastro() {
     };
 
     await api.post("/", data)
-    alert("Usuário cadastrado")
-
-  }
+      .then((response) => {
+        setErros(response.data.erros)
+      })
+   }
 
   return (
     <div id="page-cadastro">
@@ -42,6 +50,9 @@ function Cadastro() {
           Voltar para home
         </Link>
       </header>
+      {erros.map((erro, id) => (
+        <li key={id}>{erro.msg}</li>
+      ))}
       <form onSubmit={handleSubmit}>
         <h1>Cadastro de Usuário</h1>
         <fieldset>

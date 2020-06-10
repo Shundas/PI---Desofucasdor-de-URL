@@ -54,7 +54,7 @@ export default function Lista() {
                   className="btn"
                   id={user.id}
                   onClick={() => handleDeleteUser(user.id)}
-                >
+                  >
                   Excluir
                 </button>
                 </td>

@@ -16,7 +16,7 @@ module.exports = {
                 erros: erros.array()
             }
             if (!erros.isEmpty()) {
-                return response.status(422).json(results)
+                return response.json(results)
             } else {
                 await knex('users').insert({
                     name,
