@@ -28,30 +28,30 @@ export default function Lista() {
 
   return (
     <>
-      <header className="header"><Link to='/'>
+      <header>
+        <Link to='/'>
           <FiArrowLeft />
           Voltar para home
-        </Link></header>
+        </Link>
+      </header>
       <div className="container">
           <h1>Lista de usuários</h1>
-        <table class="table">
+        <table className="table">
           <tbody>
             <tr>
-              <th>ID</th>
               <th>Nome</th>
               <th>Email</th>
               <th>Edição/Remoção</th>
             </tr>
             {users.map((user) => (
               <tr key={user.id}>
-                <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td><Link className="tolink" to={`/editar/${user.id}`}>
                   <button>Editar</button>
                 </Link>
                 <button
-                  className="btn"
+                  className="btn-excluir"
                   id={user.id}
                   onClick={() => handleDeleteUser(user.id)}
                   >

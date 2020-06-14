@@ -47,33 +47,35 @@ export default function Editar() {
                 Voltar para Lista
             </Link>
         </header>
-            <fieldset>
-                <legend><h2>Editar usuário: {id}</h2></legend>
-                <form onSubmit={handleSubmit}>
-                    <div className="field">
-                        <label htmlFor="name">Nome</label>
-                            <input 
-                                type="text"
-                                name="name"
-                                id="name"
-                                value={userUpdate.name}
-                                onChange={handleInputChange}
-                            />
-                    </div>
+            <form onSubmit={handleSubmit}>
+                <legend>
+                    <h2>Editar usuário</h2>
+                </legend>
+                    <fieldset>  
+                        <div className="field">
+                            <label htmlFor="name">Nome</label>
+                                <input 
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    value={userUpdate.name}
+                                    onChange={handleInputChange}
+                                />
+                        </div>
 
-                    <div className="field">
-                        <label htmlFor="email">E-mail</label>
-                            <input 
-                                type="text"
-                                name="email"
-                                id="email"
-                                value={userUpdate.email}
-                                onChange={handleInputChange}
-                            />
-                    </div>
-                    <button type="submit">Editar</button>
-                </form>
-            </fieldset>
+                        <div className="field">
+                            <label htmlFor="email">E-mail</label>
+                                <input 
+                                    type="text"
+                                    name="email"
+                                    id="email"
+                                    value={userUpdate.email}
+                                    onChange={handleInputChange}
+                                />
+                        </div>
+                    </fieldset>
+                <button type="submit">Editar</button>
+            </form>
         </div>
     )
 }
