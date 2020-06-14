@@ -20,10 +20,11 @@ export default function Lista() {
   }, []);
 
   async function handleDeleteUser(id) {
-    //    alert('Você deseja realmente excluir esse usuário?'
-    await api.delete(`/${id}`);
-    alert("Usuário Deletado");
-    window.location.reload();
+    if(window.confirm("Você deseja realmente excluir este usuário?")) {
+      await api.delete(`/${id}`);
+      alert("Usuário Deletado");
+      window.location.reload();
+    }
   }
 
   return (
