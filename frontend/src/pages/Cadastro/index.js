@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import api from "../../services/api";
 import {Link} from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi';
+import Alert from 'react-bootstrap/Alert';
 
 import './style.css'
 
 function Cadastro() {
+  
   const [erros, setErros] = useState([
     {
       msg:"",
@@ -51,15 +53,13 @@ function Cadastro() {
         </Link>
       </header>
       {erros.map((erro, id) => (
-        <li key={id}>{erro.msg}</li>
+        <div key={id}>
+          <Alert variant="danger">{erro.msg}</Alert>
+        </div>
       ))}
       <form onSubmit={handleSubmit}>
-        <h1>Cadastro de Usuário</h1>
+        <h2>Cadastro de Usuário</h2>
         <fieldset>
-          <legend>
-            <h2>Dados</h2>
-          </legend>
-
           <div className="field">
             <label htmlFor="name">Nome</label>
             <input

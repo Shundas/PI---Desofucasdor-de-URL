@@ -20,7 +20,7 @@ router.delete('/app/:id', userController.delete);
 
 //Criar um user
 router.post('/app', [
-    check('name', 'Nome é cmapo obrigatório').trim().escape().notEmpty(),
+    check('name', 'Nome é campo obrigatório').trim().escape().notEmpty(),
     check('email', 'E-mail é campo obrigatório').trim().escape().notEmpty().bail().isEmail().withMessage('E-mail inválido'),
     check('senha', 'Senha é campo obrigatório').trim().escape().notEmpty()],
     check('confSenha','Confirmar senha é campo obrigatório.')

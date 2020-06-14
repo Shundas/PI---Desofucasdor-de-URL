@@ -4,14 +4,25 @@ import "./styles.css";
 
 export default function Home() {
   return (
-    <div id="page-home">
-        <Link to="/cadastro">
-          <button>Cadastro</button>
-        </Link>
-        <br />
-        <Link to="/lista">
-          <button>Lista</button>
-        </Link>
+    <div className="login-form">
+      <h6>LOGIN</h6>
+      <form action="">
+        <div className="textbox">
+          <input type="text" placeholder="E-mail"/>
+          <span class="check-message">Obrigatório</span>
+        </div>
+        <div className="textbox">
+          <input type="password" placeholder="Senha"/>
+          <span class="check-message">Obrigatório</span>
+        </div>
+        <input type="submit" value="Entrar" class="login-btn active" disabled></input>
+        <div className="dont-have-account">
+          Não possui uma conta?
+          <Link to="/cadastro">
+            <a>Cadastrar</a>
+          </Link>
+        </div>
+      </form>
     </div>
   );
 }
