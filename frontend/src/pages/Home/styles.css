@@ -15,7 +15,15 @@ body{
 
 }
 
+.login-form h2{
+  color: #f1f1f1;
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 .login-form h6{
+  margin-top: 30px;
   color: #f1f1f1;
   font-size: 15px;
   text-transform: uppercase;

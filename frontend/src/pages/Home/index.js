@@ -5,6 +5,7 @@ import "./styles.css";
 export default function Home() {
   return (
     <div className="login-form">
+     <h2>Bem vindo ao Desofuscador</h2> 
       <h6>LOGIN</h6>
       <form action="">
         <div className="textbox">

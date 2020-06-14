@@ -53,9 +53,7 @@ function Cadastro() {
         </Link>
       </header>
       {erros.map((erro, id) => (
-        <div key={id}>
-          <Alert variant="danger">{erro.msg}</Alert>
-        </div>
+        <Alert key={id} variant="danger">{erro.msg}</Alert>
       ))}
       <form onSubmit={handleSubmit}>
         <h2>Cadastro de Usuário</h2>
