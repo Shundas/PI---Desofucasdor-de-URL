@@ -53,7 +53,7 @@ function Cadastro() {
         </Link>
       </header>
       {erros.map((erro, id) => (
-        <Alert key={id} variant="danger">{erro.msg}</Alert>
+        erro.msg === "" ? "" :<Alert key={id} variant="danger">{erro.msg}</Alert>
       ))}
       <form onSubmit={handleSubmit}>
         <h2>Cadastro de Usuário</h2>
