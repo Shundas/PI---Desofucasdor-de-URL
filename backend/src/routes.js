@@ -5,6 +5,8 @@ const { check } = require('express-validator');
 
 
 
+//Rota para enviar arquivo
+router.post('/app/upload');
 
 //Buscar um único user pelo ID
 router.get('/app/:id', userController.unique);
