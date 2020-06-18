@@ -20,7 +20,7 @@ export default function Home() {
         <div className="dont-have-account">
           Não possui uma conta?
           <Link to="/cadastro">
-            <a>Cadastrar</a>
+            <a> Cadastrar</a>
           </Link>
         </div>
       </form>
