@@ -1,12 +1,12 @@
 const multer = require('multer');
 
 module.exports = {
-    enviarArquivo() {
+    enviarArquivo(request, response) {
     const upload = multer({
         dest: 'upload_files/'
     }).single('attachment');
     
-    upload((request, response, err) => {
+    upload(request, response, (err) => {
         if (err) {
             console.log(err);
             response.status(422).send();

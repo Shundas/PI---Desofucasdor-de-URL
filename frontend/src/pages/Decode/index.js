@@ -1,9 +1,7 @@
 import React from 'react';
-import api from '../../services/api';
 import Form from 'react-bootstrap/Form';
 
 function Decode() {
-
     return (
         <div>
             <Form action="http://localhost:3001/app/upload" method="POST" encType="multipart/form-data">
