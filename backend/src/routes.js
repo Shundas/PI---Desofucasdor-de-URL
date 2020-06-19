@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const express = require('express');
 const userController = require('./controller/userController')
+const decodeController = require('./controller/decodeController')
 const { check } = require('express-validator');
 
 
 
 //Rota para enviar arquivo
-router.post('/app/upload');
+router.post('/app/upload', decodeController.enviarArquivo);
 
 //Buscar um único user pelo ID
 router.get('/app/:id', userController.unique);

@@ -3,11 +3,10 @@ import api from '../../services/api';
 import Form from 'react-bootstrap/Form';
 
 function Decode() {
-    const teste = api.post("/upload")
 
     return (
         <div>
-            <Form action={teste} method="POST" encType="multipart/form-data">
+            <Form action="http://localhost:3001/app/upload" method="POST" encType="multipart/form-data">
                <Form.Group>
                    <Form.File id="attachment" name="attachment" label="Anexo" />
                </Form.Group> 
