@@ -5,7 +5,8 @@ const { once } = require('events');
 
 module.exports = {
     enviarArquivo(request, response) {
-
+    
+    //Ṕarametrizando o recebimento do arquivo
     const upload = multer({
         dest: 'upload_files/',
         fileFilter: (request, file, cb) => {
@@ -16,6 +17,7 @@ module.exports = {
         }
     }).single('attachment');
     
+    //Recebendo arquivo, atribuindo função de processamento e enviando para Download
     upload(request, response, async (err) => {
         if (err) {
             console.log(err);
@@ -31,6 +33,7 @@ module.exports = {
         }
     })
     
+    //Processamento do arquivo
     async function processFile(file) {
         const outPath = `output_files/${file.filename}`;
         const writeStream = fs.createWriteStream(outPath, {
