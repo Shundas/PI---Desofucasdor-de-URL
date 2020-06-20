@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import api from "../../services/api";
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi';
 import Alert from 'react-bootstrap/Alert';
 
@@ -42,6 +42,9 @@ function Cadastro() {
       .then((response) => {
         setErros(response.data.erros)
       })
+    // alert('Ponto de coleta criado!')
+    // history.push('/')
+
    }
 
   return (

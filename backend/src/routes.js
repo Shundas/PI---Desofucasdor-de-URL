@@ -5,8 +5,12 @@ const decodeController = require('./controller/decodeController')
 const { check } = require('express-validator');
 const multer = require('multer');
 
-//Rota para enviar arquivo
-router.post('/app/upload', decodeController.enviarArquivo)
+//Rota para manipular Arquivo
+router.post('/app/upload', decodeController.manipulaArquivo)  //Verificar se da para utilizar dois parâmetros
+
+//Rota para manipular string
+router.post('/app/string', decodeController.manipulaString)
+
 
 //Buscar um único user pelo ID
 router.get('/app/:id', userController.unique);

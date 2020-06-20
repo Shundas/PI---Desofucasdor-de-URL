@@ -6,6 +6,7 @@ import Lista from "./pages/Lista";
 import Editar from "./pages/Editar";
 import Home from "./pages/Home/index";
 import Decode from "./pages/Decode/index"
+import DecodeString from './pages/DecodeString/index'
 
 function Routes() {
   return (
@@ -15,6 +16,7 @@ function Routes() {
       <Route component={Lista} path="/lista" />
       <Route component={Editar} path="/editar/:id" />
       <Route component={Decode} path="/desofuscar" />
+      <Route component={DecodeString} path="/desofuscarString" />
     </BrowserRouter>
   );
 }

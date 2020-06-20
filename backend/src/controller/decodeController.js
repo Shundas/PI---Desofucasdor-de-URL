@@ -4,8 +4,8 @@ const readline = require('readline')
 const { once } = require('events'); 
 
 module.exports = {
-    enviarArquivo(request, response) {
-    
+  manipulaArquivo(request, response) {
+
     //Ṕarametrizando o recebimento do arquivo
     const upload = multer({
         dest: 'upload_files/',
@@ -61,6 +61,11 @@ module.exports = {
 
         return outPath;
     }
+  },
+
+  manipulaString(request, response) {
+    const log = request.body;
+    return response.json(log)
   }
 }
 
