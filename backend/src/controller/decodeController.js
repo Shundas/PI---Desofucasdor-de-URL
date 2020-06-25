@@ -1326,12 +1326,11 @@ module.exports = {
 
 
     //Expressões Regulares, para realizar o desofuscamento
-
     var regexHexaChar = /[0-7][0-9A-Fa-f]/g;
 
-    var regexChar = /char\([0-9]{2,3}\)/g;
+    var regexChar = /char\([0-9]{2,3}\)/g; 
 
-    var regexAmpersan = /&\w{2,};/g;
+    var regexAmpersan = /&\w{2,};/g; 
 
     var regexPercent = /%[0-7][0-9A-Fa-f]/g;
 
