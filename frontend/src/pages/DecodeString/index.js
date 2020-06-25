@@ -4,6 +4,10 @@ import api from '../../services/api'
 
 
 function DecodeString() {
+    // const [logDesofuscado, setLogDesofuscado] = useState({
+    //     log: ""
+    // })
+
     const [log, setLog] = useState({
         log: ""
     })
@@ -17,8 +21,13 @@ function DecodeString() {
         const {log} = log;
 
         api.post('/string', log)
-
+        // .then((response) => {
+        //     setLogDesofuscado(response.data)
+        //     // setErros(response.data.erros)
+        // })
     }
+
+
 
     return (
         <div id="page-decode-log">
@@ -31,9 +40,20 @@ function DecodeString() {
                         id="log"
                         onChange={handleInputChange}
                     />
-          </div>
+                </div>
                <button type="submit">Enviar</button>
             </Form>
+            <div>
+                <label htmlFor="logRecebido">Log Desofuscado:</label>
+                {/* <input
+                    type="text"
+                    name="log"
+                    id="log"
+                    disabled="disabled"
+                    value={logDesofuscado.log}
+                    onChange={handleSubmit}
+                /> */}
+            </div>
         </div>
     )
 }

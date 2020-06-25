@@ -2,6 +2,8 @@ const multer = require('multer');
 const fs = require('fs');
 const readline = require('readline')
 const { once } = require('events');
+// const { validationResult } = require("express-validator");
+
 
 module.exports = {
     manipulaArquivo(request, response) {
@@ -1322,6 +1324,7 @@ module.exports = {
 
     }
 
+
     //Expressões Regulares, para realizar o desofuscamento
 
     var regexHexaChar = /[0-7][0-9A-Fa-f]/g;
@@ -1334,7 +1337,6 @@ module.exports = {
 
     //Recebendo informação do cliente e realizando uma desestruturação
     let { log } = request.body;    
-
 
     //Desofuscando, utilizando a função replace - substituição
     log = log.replace(regexPercent, function (n) { return htmlEntitiesPer[n] })
