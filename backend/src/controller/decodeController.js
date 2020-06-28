@@ -108,7 +108,7 @@ module.exports = {
 
     //Criando objeto de saída que recebe o log desofuscado
     const saida = {
-        log,
+        logDecode: log,
         erros: erros.array(),
     }
 

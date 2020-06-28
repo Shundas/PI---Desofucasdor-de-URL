@@ -1,0 +1,82 @@
+#page-decode {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  #logAnexo {
+      color: #f1f1f1;
+  }
+  
+  #page-decode form {
+    width: 470px;
+    background: #202020;
+    padding: 30px 60px;
+    margin: 30px auto;
+    max-width: 730px;
+    border-radius: 8px;
+  
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #page-decode form h2 {
+    color: #f1f1f1;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  
+  #page-decode label {
+    color: #f1f1f1;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+
+  
+  #page-decode form .field label {
+    color: #f1f1f1;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+  
+  }
+  
+  
+  #page-decode form .field {
+    flex: 1;
+  
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+  
+  #page-decode form .field input[type=text] {
+    flex: 1;
+    background: #2b2b2b;
+    border: 0;
+    padding: 16px 24px;
+    font-size: 16px;
+    color: #f4f4f4;
+  }
+  
+  #page-decode form button {
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: .3s linear;
+    background: #037bee;
+    color:#fff;
+  }
+  
+  #page-decode form button:hover {
+    opacity: .7;
+  }
