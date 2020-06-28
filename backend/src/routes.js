@@ -9,7 +9,9 @@ const multer = require('multer');
 router.post('/app/upload', decodeController.manipulaArquivo)  //Verificar se da para utilizar dois parâmetros
 
 //Rota para manipular string
-router.post('/app/string', decodeController.manipulaString)
+router.post('/app/string', [
+    check('log', 'Log é um campo obrigatório').trim().escape().notEmpty()
+], decodeController.manipulaString)
 
 
 //Buscar um único user pelo ID
