@@ -28,6 +28,11 @@ module.exports = {
                 response.status(422).send();
             } else {
                 let file = request.file;
+
+                if(!file) {
+                    response.json({ msg: "Arquivo vazio" });
+                }
+
                 const path = await processFile(file)
                 if (path) {
                     response.download(path, file.originalname);
