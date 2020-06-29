@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import Header from '../../components/Header'
+
 
 export default function Home() {
   return (
+    <>
+    <Header />
     <div className="login-form">
      <h2>Bem vindo ao Desofuscador</h2> 
       <h6>LOGIN</h6>
@@ -25,5 +29,6 @@ export default function Home() {
         </div>
       </form>
     </div>
+    </>
   );
 }

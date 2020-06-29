@@ -1,0 +1,15 @@
+#page-header {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: inline;
+  }
+  
+  #page-header header {
+    margin-top: 5px;
+    display: inline-block;
+  }
+
+  #page-header li {
+    display: inline;
+  }
