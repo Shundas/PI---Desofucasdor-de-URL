@@ -1,15 +1,31 @@
-#page-header {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: inline;
-  }
-  
-  #page-header header {
-    margin-top: 5px;
-    display: inline-block;
-  }
+/*
+  color btn blue > #037bee
+  color btn grapy > #202020
+*/
 
-  #page-header li {
-    display: inline;
-  }
+header#wrapper > nav {
+  width: 100%;
+  max-width: 800px;
+  background-color: #202020;
+  margin-bottom: 25px;
+  padding: 20px 10px 8px;
+  border-radius: 8px;
+}
+
+header#wrapper > nav > ul.menu {
+  display: flex;
+}
+
+header#wrapper > nav > ul.menu > li {
+  display: block;
+  margin-left: 15px;
+}
+
+header#wrapper > nav > ul.menu > li > .to-link {
+  text-decoration: none;
+}
+
+header#wrapper > nav > ul.menu > li > .to-link:hover {
+  color: #5e5e5e;
+  transition: 0.5s;
+}

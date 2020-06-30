@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import api from "../../services/api";
-import {Link, useHistory} from 'react-router-dom'
-import { FiArrowLeft } from 'react-icons/fi';
-import Alert from 'react-bootstrap/Alert';
+import { Link, useHistory } from "react-router-dom";
+import Header from "../../components/Header";
+import { FiArrowLeft } from "react-icons/fi";
+import Alert from "react-bootstrap/Alert";
 
-import './style.css'
+import "./style.css";
 
 function Cadastro() {
-  
   const [erros, setErros] = useState([
     {
-      msg:"",
-    }
-  ])
+      msg: "",
+    },
+  ]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -35,74 +35,75 @@ function Cadastro() {
       name,
       email,
       senha,
-      confSenha
+      confSenha,
     };
 
-    await api.post("/", data)
-      .then((response) => {
-        setErros(response.data.erros)
-      })
+    await api.post("/", data).then((response) => {
+      setErros(response.data.erros);
+    });
     // alert('Ponto de coleta criado!')
     // history.push('/')
-
-   }
+  }
 
   return (
-    <div id="page-cadastro">
-      <header>
-        <Link to='/'>
-          <FiArrowLeft />
-          Voltar para home
-        </Link>
-      </header>
-      {erros.map((erro, id) => (
-        erro.msg === "" ? "" :<Alert key={id} variant="danger">{erro.msg}</Alert>
-      ))}
-      <form onSubmit={handleSubmit}>
-        <h2>Cadastro de Usuário</h2>
-        <fieldset>
-          <div className="field">
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              onChange={handleInputChange}
-            />
-          </div>
+    <>
+      <Header />
+      <div id="page-cadastro">
+        {erros.map((erro, id) =>
+          erro.msg === "" ? (
+            ""
+          ) : (
+            <Alert key={id} variant="danger">
+              {erro.msg}
+            </Alert>
+          )
+        )}
+        <form onSubmit={handleSubmit}>
+          <h2>Cadastro de Usuário</h2>
+          <fieldset>
+            <div className="field">
+              <label htmlFor="name">Nome</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                onChange={handleInputChange}
+              />
+            </div>
 
-          <div className="field">
-            <label htmlFor="email">E-mail</label>
-            <input
-              type="text"
-              name="email"
-              id="email"
-              onChange={handleInputChange}
-            />
-          </div>
+            <div className="field">
+              <label htmlFor="email">E-mail</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                onChange={handleInputChange}
+              />
+            </div>
 
-          <div className="field">
-            <label htmlFor="senha">Senha</label>
-            <input
-              type="password"
-              name="senha"
-              id="senha"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="confSenha">Confirma Senha</label>
-            <input
-              type="password"
-              name="confSenha"
-              id="confSenha"
-              onChange={handleInputChange}
-            />
-          </div>
-        </fieldset>
-        <button type="submit">Cadastrar</button>
-      </form>
-    </div>
+            <div className="field">
+              <label htmlFor="senha">Senha</label>
+              <input
+                type="password"
+                name="senha"
+                id="senha"
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field">
+              <label htmlFor="confSenha">Confirma Senha</label>
+              <input
+                type="password"
+                name="confSenha"
+                id="confSenha"
+                onChange={handleInputChange}
+              />
+            </div>
+          </fieldset>
+          <button type="submit">Cadastrar</button>
+        </form>
+      </div>
+    </>
   );
 }
 
