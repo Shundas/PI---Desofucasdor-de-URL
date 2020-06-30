@@ -92,9 +92,9 @@ module.exports = {
     manipulaString(request, response) {
 
     //Expressões Regulares, para realizar o desofuscamento
-    var regexHexaChar = /0x[0-7][0-9A-Fa-f]/g;
+    var regexHexaChar = /0x[2-7][0-9A-Fa-f]/g;
 
-    var regexChar = /char\([0-9]{2,3}\)/g; 
+    var regexChar = /char\([3-9][0-9]\)|char\(1[0-2][0-6]\)/g; 
 
     var regexAmpersan = /&\w{2,};/g; 
 
@@ -109,7 +109,14 @@ module.exports = {
     log = log.replace(regexPercent, function (n) { return hashMap.htmlEntitiesPer[n] })
     log = log.replace(regexChar, function (n) { return hashMap.htmlEntitiesChar[n] })
     log = log.replace(regexAmpersan, function (n) { return hashMap.htmlEntitiesAmp[n] })
-    log = log.replace(regexHexaChar, function (n) { return hashMap.hexaChar[n] })
+    log = log.replace(regexHexaChar, 
+        function (n) { 
+        
+        let t1 = log.split("")
+        console.log(t1.split(/,/,2))
+        return hashMap.hexaChar[n] 
+    
+    })
 
     //Criando objeto de saída que recebe o log desofuscado
     const saida = {
