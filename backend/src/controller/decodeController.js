@@ -22,9 +22,9 @@ module.exports = {
     upload(request, response, async (err) => {
       if (err) {
         console.log(err);
-        response.status(422).send();
+        return response.status(422).send();
       } else {
-        let { file } = request.file;
+        let file = request.file;
 
         if (!file) {
           return response.json({ msg: 'Arquivo vazio' });
