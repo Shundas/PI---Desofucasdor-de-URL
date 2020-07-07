@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import api from "../../services/api";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Header from "../../components/Header";
-import { FiArrowLeft } from "react-icons/fi";
 import Alert from "react-bootstrap/Alert";
 
 import "./style.css";
 
 function Cadastro() {
+  const history = useHistory();
+
   const [erros, setErros] = useState([
     {
       msg: "",
@@ -40,9 +41,11 @@ function Cadastro() {
 
     await api.post("/", data).then((response) => {
       setErros(response.data.erros);
+      if(response.data.erros === null) {
+        alert("Cadastro realizado com sucesso!")
+        history.push('/')
+      }
     });
-    // alert('Ponto de coleta criado!')
-    // history.push('/')
   }
 
   return (
