@@ -32,7 +32,7 @@ module.exports = {
 
         const path = await processFile(file);
         if (path) {
-          response.download(path, file.originalname);
+          return response.download(path, file.originalname);
         } else {
           return response.status(500).send();
         }
