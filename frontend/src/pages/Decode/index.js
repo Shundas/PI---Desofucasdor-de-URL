@@ -87,10 +87,6 @@ function Decode() {
               <Form.File id="attachment" name="attachment" />
             </Form.Group>
 
-            {fileserr.map((err) => (
-              <h1>{err.fileerro}</h1>
-            ))}
-
             <button type="submit">Enviar Anexo</button>
           </Form>
         </div>
