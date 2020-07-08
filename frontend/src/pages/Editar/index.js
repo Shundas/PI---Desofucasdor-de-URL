@@ -3,11 +3,19 @@ import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
+import Alert from "react-bootstrap/Alert";
+
 
 import "./style.css";
 
 export default function Editar() {
   const { id } = useParams();
+
+  const [erros, setErros] = useState([
+    {
+      msg: "",
+    },
+  ]);
 
   const [userUpdate, setUserUpdate] = useState({
     name: "",
@@ -34,8 +42,10 @@ export default function Editar() {
       email,
     };
 
-    await api.put(`/${id}`, data);
-    alert("Usuário Editado");
+    await api.put(`/${id}`, data).then((response) => {
+      setErros(response.data.erros);
+    });
+
   }
 
   return (
@@ -46,6 +56,13 @@ export default function Editar() {
           Voltar para Lista
         </Link>
       </header>
+      {
+          erros.length === 0 ? (
+            <Alert variant="success">Usuário Editado</Alert>
+          ) : (
+            ""
+          )
+      }
       <form onSubmit={handleSubmit}>
         <legend>
           <h2>Editar usuário</h2>

@@ -59,10 +59,11 @@ router.post(
 router.put(
   '/app/:id',
   [
-    check('name').trim().escape(),
-    check('email')
+    check('name', 'Nome é campo obrigatório').trim().escape().notEmpty(),
+    check('email', 'E-mail é campo obrigatório')
       .trim()
       .escape()
+      .notEmpty()
       .bail()
       .isEmail()
       .withMessage('E-mail inválido'),
