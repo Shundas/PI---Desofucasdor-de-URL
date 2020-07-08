@@ -39,13 +39,17 @@ function Cadastro() {
       confSenha,
     };
 
-    await api.post("/", data).then((response) => {
+    await api.post("/", data).then((response) => { 
       setErros(response.data.erros);
-      if(response.data.erros === null) {
-        alert("Cadastro realizado com sucesso!")
+    });
+    
+    //Verificar
+    if(erros[0].msg === ""){
+        alert('Usuário Cadastrado com Sucesso')
         history.push('/')
       }
-    });
+    
+     
   }
 
   return (
