@@ -1,29 +1,49 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import api from "../../services/api";
-import Alert from "react-bootstrap/Alert";
-import Header from "../../components/Header";
+import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import api from '../../services/api';
+import Alert from 'react-bootstrap/Alert';
+import Header from '../../components/Header';
 
-import "./style.css";
+import './style.css';
 
 function Decode() {
+  const [fileserr, setFileErr] = useState([{ fileerro: '' }]);
   const [erros, setErros] = useState([
     {
-      msg: "",
+      msg: '',
     },
   ]);
 
   const [logDesofuscado, setLogDesofuscado] = useState({
-    logDecode: "",
+    logDecode: '',
   });
 
   const [logOfuscado, setLogOfuscado] = useState({
-    log: "",
+    log: '',
+  });
+
+  const [files, setFiles] = useState({
+    file: '',
   });
 
   function handleInputChange(event) {
     const { name, value } = event.target;
     setLogOfuscado({ ...logOfuscado, [name]: value });
+  }
+
+  async function VerifyFiles(evt) {
+    evt.preventDefault();
+
+    const { file } = files;
+
+    const data = {
+      file,
+    };
+
+    await api.post('/upload', data).then((response) => {
+      setFiles(response.data);
+      setFileErr(response.data.erros);
+    });
   }
 
   async function handleSubmit(event) {
@@ -35,7 +55,7 @@ function Decode() {
       log,
     };
 
-    await api.post("/string", data).then((response) => {
+    await api.post('/string', data).then((response) => {
       setLogDesofuscado(response.data);
       setErros(response.data.erros);
     });
@@ -46,8 +66,8 @@ function Decode() {
       <Header />
       <div id="page-decode">
         {erros.map((erro, id) =>
-          erro.msg === "" ? (
-            ""
+          erro.msg === '' ? (
+            ''
           ) : (
             <Alert key={id} variant="danger">
               {erro.msg}
@@ -57,6 +77,7 @@ function Decode() {
 
         <div id="logAnexo">
           <Form
+            onSubmit={VerifyFiles}
             action="http://localhost:3001/app/upload"
             method="POST"
             encType="multipart/form-data"
@@ -65,6 +86,11 @@ function Decode() {
             <Form.Group>
               <Form.File id="attachment" name="attachment" />
             </Form.Group>
+
+            {fileserr.map((err) => (
+              <h1>{err.fileerro}</h1>
+            ))}
+
             <button type="submit">Enviar Anexo</button>
           </Form>
         </div>
@@ -80,8 +106,8 @@ function Decode() {
                 onChange={handleInputChange}
               />
             </div>
-            {logDesofuscado.logDecode === "" ? (
-              ""
+            {logDesofuscado.logDecode === '' ? (
+              ''
             ) : (
               <Alert variant="success">
                 Log Desofuscado: {logDesofuscado.logDecode}
