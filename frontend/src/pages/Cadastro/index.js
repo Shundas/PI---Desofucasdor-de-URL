@@ -41,21 +41,21 @@ function Cadastro() {
 
     await api.post("/", data).then((response) => { 
       setErros(response.data.erros);
-    });
-    
-    //Verificar
-    if(erros[0].msg === ""){
-        alert('Usuário Cadastrado com Sucesso')
-        history.push('/')
-      }
-    
-     
+    });     
   }
 
   return (
     <>
       <Header />
       <div id="page-cadastro">
+        {
+          erros.length === 0 ? (
+            <Alert variant="success">Usuário Cadastrado</Alert>
+          ) : (
+            ""
+          )
+        }
+        
         {erros.map((erro, id) =>
           erro.msg === "" ? (
             ""
