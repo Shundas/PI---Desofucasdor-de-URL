@@ -23,7 +23,7 @@ function Decode() {
   });
 
   const [Attachment, setAttachment] = useState({
-    file: '',
+    attachment: '',
   });
 
   function handleInputChange(event) {
@@ -39,22 +39,23 @@ function Decode() {
   async function VerifyFiles(evt) {
     evt.preventDefault();
 
-    const { file }  = Attachment;
-    console.log("File: " +file)
-    console.log("Attachment: " + Attachment)
+    const { attachment }  = Attachment;
 
+    console.log("O arquivo antes do formData: " + attachment)
+    
+    const formData = new FormData();
+    formData.append('attachment', attachment)
 
-    const data = {
-      file,
-    };
+    console.log(formData)
 
-    console.log("Data " + data)
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
 
-    await api.post('/upload', data).then((response) => {
-      console.log("Response.data.erros " + response.data.erros)
+    await api.post('/upload', formData, config).then((response) => {
       setFileErr(response.data.erros);
-      setAttachment(response.data)
-      console.log("Response.data " + response.data)
     });
   }
 
@@ -66,6 +67,8 @@ function Decode() {
     const data = {
       log,
     };
+
+    console.log(data)
 
     await api.post('/string', data).then((response) => {
       setLogDesofuscado(response.data);
@@ -97,16 +100,13 @@ function Decode() {
 
         <div id="logAnexo">
           <Form
+            // onSubmit={VerifyFiles}
             encType="multipart/form-data"
-            onSubmit={VerifyFiles}
-            // action="http://localhost:3001/app/upload"
-            // method="POST"
+            action="http://localhost:3001/app/upload"
+            method="POST"
           >
             <label htmlFor="anexo">Anexo de Arquivo</label>
-            <Form.Group>
-              <Form.File id="attachment" name="attachment" onChange={handleInputChangeFile} />
-            </Form.Group>
-
+              <Form.File type="file"  name="attachment" onChange={handleInputChangeFile} />
             <button type="submit">Enviar Anexo</button>
           </Form>
         </div>

@@ -29,6 +29,8 @@ module.exports = {
       } else {
         let file = request.file;
 
+        console.log(file)
+
         const saida = {
           erros: erros.array(),
         };
@@ -101,13 +103,23 @@ module.exports = {
 
   manipulaString(request, response) {
     //Expressões Regulares, para realizar o desofuscamento
-    var regexHexaChar = /0x[2-7][0-9A-Fa-f]/g;
 
-    var regexChar = /char\([3-9][0-9]\)|char\(1[0-2][0-6]\)/g;
+    var regexHexaChar = /0x[0-7][0-9A-Fa-f]/g;
+
+    var regexChar = /char\([0-9]{2,3}\)/g;
 
     var regexAmpersan = /&\w{2,};/g;
 
     var regexPercent = /%[0-7][0-9A-Fa-f]/g;
+
+
+    // var regexHexaChar = /0x[2-7][0-9A-Fa-f]/g;
+
+    // var regexChar = /char\([3-9][0-9]\)|char\(1[0-2][0-6]\)/g;
+
+    // var regexAmpersan = /&\w{2,};/g;
+
+    // var regexPercent = /%[0-7][0-9A-Fa-f]/g;
 
     //Recebendo informação do cliente e realizando uma desestruturação
     let { log } = request.body;

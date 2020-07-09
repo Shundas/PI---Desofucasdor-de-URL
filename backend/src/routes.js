@@ -8,7 +8,7 @@ const multer = require('multer');
 //Rota para manipular Arquivo
 router.post(
   '/app/upload',
-  [check('attachment', 'File é um arquivo obrigatorio').trim().escape().notEmpty()],
+  [check('attachment', 'File é um campo obrigatório').trim().escape().notEmpty()],
   decodeController.manipulaArquivo
 ); //Verificar se da para utilizar dois parâmetros
 
