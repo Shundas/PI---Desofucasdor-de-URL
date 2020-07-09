@@ -18,6 +18,9 @@ module.exports = {
       },
     }).single('attachment');
 
+    //Erros
+    const erros = validationResult(request);
+
     //Recebendo arquivo, atribuindo função de processamento e enviando para Download
     upload(request, response, async (err) => {
       if (err) {
@@ -26,15 +29,19 @@ module.exports = {
       } else {
         let file = request.file;
 
-        if (!file) {
-          return response.json({ msg: 'Arquivo vazio' });
+        const saida = {
+          erros: erros.array(),
+        };
+
+        if(!file) {
+          return response.json(saida);
         }
 
         const path = await processFile(file);
         if (path) {
           return response.download(path, file.originalname);
         } else {
-          return response.status(500).send();
+          return response.status(500).send()
         }
       }
     });

@@ -7,7 +7,7 @@ import Header from '../../components/Header';
 import './style.css';
 
 function Decode() {
-  const [fileserr, setFileErr] = useState([{ fileerro: '' }]);
+  const [fileserr, setFileErr] = useState([{ msg: '' }]);
   const [erros, setErros] = useState([
     {
       msg: '',
@@ -22,7 +22,7 @@ function Decode() {
     log: '',
   });
 
-  const [files, setFiles] = useState({
+  const [Attachment, setAttachment] = useState({
     file: '',
   });
 
@@ -31,18 +31,30 @@ function Decode() {
     setLogOfuscado({ ...logOfuscado, [name]: value });
   }
 
+  function handleInputChangeFile(event) {
+    const { name, value } = event.target;
+    setAttachment({ ...Attachment, [name]: value });
+  }
+
   async function VerifyFiles(evt) {
     evt.preventDefault();
 
-    const { file } = files;
+    const { file }  = Attachment;
+    console.log("File: " +file)
+    console.log("Attachment: " + Attachment)
+
 
     const data = {
       file,
     };
 
+    console.log("Data " + data)
+
     await api.post('/upload', data).then((response) => {
-      setFiles(response.data);
+      console.log("Response.data.erros " + response.data.erros)
       setFileErr(response.data.erros);
+      setAttachment(response.data)
+      console.log("Response.data " + response.data)
     });
   }
 
@@ -65,6 +77,14 @@ function Decode() {
     <>
       <Header />
       <div id="page-decode">
+        {
+          fileserr.map((filerr, id) =>
+           filerr.msg === '' ? (
+             ''
+           ) : (
+           <Alert key={id} variant="danger">{filerr.msg}</Alert>
+           ))
+        }
         {erros.map((erro, id) =>
           erro.msg === '' ? (
             ''
@@ -77,14 +97,14 @@ function Decode() {
 
         <div id="logAnexo">
           <Form
-            onSubmit={VerifyFiles}
-            action="http://localhost:3001/app/upload"
-            method="POST"
             encType="multipart/form-data"
+            onSubmit={VerifyFiles}
+            // action="http://localhost:3001/app/upload"
+            // method="POST"
           >
             <label htmlFor="anexo">Anexo de Arquivo</label>
             <Form.Group>
-              <Form.File id="attachment" name="attachment" />
+              <Form.File id="attachment" name="attachment" onChange={handleInputChangeFile} />
             </Form.Group>
 
             <button type="submit">Enviar Anexo</button>
