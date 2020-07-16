@@ -1,24 +1,33 @@
 const knex = require("../database/index");
 const { validationResult } = require("express-validator");
-// const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 module.exports = {
   //Criação do usuário com validação --OK
   async create(request, response, next) {
     try {
       const erros = validationResult(request);
-      const dados = ({ name, email, senha } = request.body);
+      const { senha, name, email } = request.body;
+
+      //Hash de Senha
+      //Salt = sequencia de caracteres, número ou termos adicionados antes da senha (+complexo)
+      var salt = bcrypt.genSaltSync(10)
+      var senhaHash = bcrypt.hashSync(senha, salt)
+      
       const results = {
-        dados,
+        name,
+        email,
+        senha: senhaHash,
         erros: erros.array(),
       };
+
       if (!erros.isEmpty()) {
         return response.json(results);
       } else {
         await knex("users").insert({
           name,
           email,
-          senha,
+          senha: senhaHash,
         });
         return response.json(results);
       }
@@ -100,19 +109,38 @@ module.exports = {
     }
   },
 
-  // buscando unico user -- pelo ID
-  async unique(request, response, next) {
-    try {
-      const { id } = request.params;
-      const pesquisaUserUnico = await knex("users").where("id", id).first();
+  //TO fazendo aqui seus demonho
+  async login(request, response) {
 
-      if (!pesquisaUserUnico) {
-        return response.json({ msg: "Usuário não encontrado" }); //verificar
-      } else {
-        return response.json(pesquisaUserUnico);
-      }
-    } catch (error) {
-      next(error);
+    const { email, senha } = request.body;
+    const erros = validationResult(request);
+
+    if(erros.isEmpty()) {
+      const userEnail = await knex("users").select("email").where('email', email)
+      const userSenha = await knex("users").select("senha").where("senha", senha)
+      
+      bcrypt.compare(userSenha, senha)
+        .then(result => {
+
+        })
+      
     }
-  },
+  }
+
+  //Não vamos utilizar
+  // // buscando unico user -- pelo ID
+  // async unique(request, response, next) {
+  //   try {
+  //     const { id } = request.params;
+  //     const pesquisaUserUnico = await knex("users").where("id", id).first();
+
+  //     if (!pesquisaUserUnico) {
+  //       return response.json({ msg: "Usuário não encontrado" }); //verificar
+  //     } else {
+  //       return response.json(pesquisaUserUnico);
+  //     }
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // },
 };

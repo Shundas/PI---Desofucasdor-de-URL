@@ -5,17 +5,25 @@ const decodeController = require('./controller/decodeController');
 const { check } = require('express-validator');
 const multer = require('multer');
 
+
+//Rota para login
+router.post('/app/login', [
+  check('email', 'Informe o e-mail').trim().escape().notEmpty(),
+  check('senha', 'Informe a senha').trim().escape().notEmpty()
+], )
+
+
 //Rota para manipular Arquivo
 router.post(
   '/app/upload',
   [check('attachment', 'File é um campo obrigatório').trim().escape().notEmpty()],
   decodeController.manipulaArquivo
-); //Verificar se da para utilizar dois parâmetros
+);
 
 //Rota para manipular string
 router.post(
   '/app/string',
-  [check('log', 'Log é um campo obrigatório').trim().escape().notEmpty()],
+  [check('log', 'Log é um campo obrigatório').notEmpty()],
   decodeController.manipulaString
 );
 
