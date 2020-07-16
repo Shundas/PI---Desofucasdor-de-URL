@@ -9,8 +9,6 @@ const port = 3001;
 
 app.use(cors())
 app.use(express.json());
-//Requisição multipart/form-data
-app.use(express.urlencoded({extended : true}));
 app.use('/', routes);
 
 //Utilizado para encaminhar erros - video da Rocketseat - SQL no Node.js com Knex

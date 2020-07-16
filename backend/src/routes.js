@@ -10,7 +10,7 @@ const multer = require('multer');
 router.post('/app/login', [
   check('email', 'Informe o e-mail').trim().escape().notEmpty(),
   check('senha', 'Informe a senha').trim().escape().notEmpty()
-], )
+], userController.login)
 
 
 //Rota para manipular Arquivo
