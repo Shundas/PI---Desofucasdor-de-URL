@@ -3,8 +3,7 @@ const express = require('express');
 const userController = require('./controller/userController');
 const decodeController = require('./controller/decodeController');
 const { check } = require('express-validator');
-const multer = require('multer');
-
+const auth = require('./auth');
 
 //Rota para login
 router.post('/app/login', [
@@ -17,27 +16,27 @@ router.post('/app/login', [
 router.post(
   '/app/upload',
   [check('attachment', 'File é um campo obrigatório').trim().escape().notEmpty()],
-  decodeController.manipulaArquivo
+  auth, decodeController.manipulaArquivo
 );
 
 //Rota para manipular string
 router.post(
   '/app/string',
   [check('log', 'Log é um campo obrigatório').notEmpty()],
-  decodeController.manipulaString
+  auth, decodeController.manipulaString
 );
 
 //Buscar um único user pelo ID
-router.get('/app/:id', userController.unique);
+router.get('/app/:id', auth, userController.unique);
 
 //Buscar user pelo query params (nome e email)
 router.get('/app/show', userController.show);
 
 //Buscar todos os users
-router.get('/app', userController.index);
+router.get('/app', auth, userController.index);
 
 //Deleter um user
-router.delete('/app/:id', userController.delete);
+router.delete('/app/:id', auth, userController.delete);
 
 //Criar um user
 router.post(
@@ -60,7 +59,7 @@ router.post(
     .bail()
     .custom((value, { req }) => value === req.body.senha)
     .withMessage('Senhas não conferem.'),
-  userController.create
+  auth, userController.create
 );
 
 //Atualizar um user
@@ -76,7 +75,7 @@ router.put(
       .isEmail()
       .withMessage('E-mail inválido'),
   ],
-  userController.update
+  auth, userController.update
 );
 
 module.exports = router;

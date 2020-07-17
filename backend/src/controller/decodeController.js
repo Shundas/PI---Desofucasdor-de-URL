@@ -137,8 +137,6 @@ module.exports = {
       return hashMap.htmlEntitiesAmp[n];
     });
     log = log.replace(regexHexaChar, function (n) {
-      let t1 = log.split('');
-      console.log(t1.split(/,/, 2));
       return hashMap.hexaChar[n];
     });
 

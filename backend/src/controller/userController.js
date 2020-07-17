@@ -11,27 +11,25 @@ module.exports = {
       const { senha, name, email } = request.body;
 
       //Hash de Senha
-      //Salt = sequencia de caracteres, número ou termos adicionados antes da senha (+complexo)
-      var salt = bcrypt.genSaltSync(10)
-      var senhaHash = bcrypt.hashSync(senha, salt)
-      
-      const results = {
-        name,
-        email,
-        senha: senhaHash,
-        erros: erros.array(),
-      };
-
-      if (!erros.isEmpty()) {
-        return response.json(results);
-      } else {
-        await knex("users").insert({
+      bcrypt.hash(senha, 10).then( async function(hash) {
+        const results = {
           name,
           email,
-          senha: senhaHash,
-        });
-        return response.json(results);
-      }
+          senha: hash,
+          erros: erros.array(),
+        };
+  
+        if (!erros.isEmpty()) {
+          return response.json(results);
+        } else {
+            await knex("users").insert({
+            name,
+            email,
+            senha: hash,
+          });
+          return response.json(results);
+        }
+      })
     } catch (error) {
       next(error);
     }
@@ -127,24 +125,29 @@ module.exports = {
     }
   },
 
-  //TO fazendo aqui seus demonho
+  //Função de Login
   async login(request, response) {
     const secret = 'VKPB6QPziQ'
 
-    const { email, senha } = request.body;
+    const dados = request.body;
+    
     const erros = validationResult(request);
 
     if(erros.isEmpty()) {
-      const userName = await knex("users").select("name").where('email', email)
-      const userEmail = await knex("users").select("email").where('email', email)
-      const userSenha = await knex("users").select("senha").where("senha", senha)
+      const userName = await knex("users").select("name").where('email', dados["email"])
+      const userEmail = await knex("users").select("email").where('email', dados["email"])
+      const userSenha = await knex("users").select("senha").where("email", dados["email"])
       
-      bcrypt.compare(userSenha, senha)
+      var [ { senha } ] = userSenha
+      var [ { name } ] = userName
+      var [ { email } ] = userEmail
+      
+      bcrypt.compare(dados["senha"], senha)
         .then(result => {
           if(result) {
             const token = jwt.sign({
-              name: userName,
-              email: userEmail
+              name: name,
+              email: email
             }, secret);
 
             return response.json({
@@ -163,7 +166,4 @@ module.exports = {
       return response.status(422).json(erros)
     }
   },
-
- 
-
 };
