@@ -59,7 +59,7 @@ router.post(
     .bail()
     .custom((value, { req }) => value === req.body.senha)
     .withMessage('Senhas não conferem.'),
-  auth, userController.create
+  userController.create
 );
 
 //Atualizar um user

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+//import { logout } from '../../utils/auth'
 
 export default function Header() {
   return (
@@ -29,6 +30,7 @@ export default function Header() {
               </Link>
             </li>
           </ul>
+        <button onClick="">Logout</button>
         </nav>
       </header>
     </>

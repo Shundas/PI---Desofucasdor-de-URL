@@ -3,6 +3,7 @@ import api from "../../services/api";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import "./styles.css";
+import { getToken } from '../../utils/auth'
 
 export default function Lista() {
   const [users, setUsers] = useState([
@@ -12,9 +13,15 @@ export default function Lista() {
       email: "",
     },
   ]);
+  const token = getToken();
 
+  const options = {
+    headers: {
+      "authorization": `Bearer ${token}`
+    }
+  }
   useEffect(() => {
-    api.get("/").then((response) => {
+    api.get("/", options).then((response) => {
       setUsers(response.data);
     });
   }, []);
