@@ -9,3 +9,8 @@ export const login = (token) => {
 export const isAuth = () => {
     return getToken() !== null;
 }
+
+export const logout = (token) => {
+    localStorage.removeItem(TOKEN_KEY, token)
+    window.location.reload();
+}

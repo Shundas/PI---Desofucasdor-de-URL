@@ -3,10 +3,18 @@ import Form from 'react-bootstrap/Form';
 import api from '../../services/api';
 import Alert from 'react-bootstrap/Alert';
 import Header from '../../components/Header';
-
+import { getToken } from '../../utils/auth'
 import './style.css';
 
 function Decode() {
+
+  const token = getToken();
+
+  const options = {
+    headers: {
+      "authorization": `Bearer ${token}`
+    }
+  }
   const [fileserr, setFileErr] = useState([{ msg: '' }]);
   const [erros, setErros] = useState([
     {
@@ -68,9 +76,7 @@ function Decode() {
       log,
     };
 
-    console.log(data)
-
-    await api.post('/string', data).then((response) => {
+    await api.post('/string', data, options).then((response) => {
       setLogDesofuscado(response.data);
       setErros(response.data.erros);
     });

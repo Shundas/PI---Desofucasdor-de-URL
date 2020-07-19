@@ -28,7 +28,7 @@ export default function Lista() {
 
   async function handleDeleteUser(id) {
     if (window.confirm("Você deseja realmente excluir este usuário?")) {
-      await api.delete(`/${id}`);
+      await api.delete(`/${id}`, options);
       alert("Usuário Deletado");
       window.location.reload();
     }

@@ -4,12 +4,15 @@ import api from "../../services/api";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import Alert from "react-bootstrap/Alert";
+import { getToken } from '../../utils/auth'
 
 
 import "./style.css";
 
 export default function Editar() {
   const { id } = useParams();
+
+  const token = getToken();
 
   const [erros, setErros] = useState([
     {
@@ -22,8 +25,14 @@ export default function Editar() {
     email: "",
   });
 
+  const options = {
+    headers: {
+      "authorization": `Bearer ${token}`
+    }
+  }
+
   useEffect(() => {
-    api.get(`/${id}`).then((response) => {
+    api.get(`/${id}`, options).then((response) => {
       setUserUpdate(response.data);
     });
   }, []);
@@ -42,7 +51,7 @@ export default function Editar() {
       email,
     };
 
-    await api.put(`/${id}`, data).then((response) => {
+    await api.put(`/${id}`, data, options).then((response) => {
       setErros(response.data.erros);
     });
 

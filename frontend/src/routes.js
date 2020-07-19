@@ -20,8 +20,20 @@ function Routes() {
           <Redirect to="/" />
         )
       }/>
-      <Route component={Editar} path="/editar/:id" />
-      <Route component={Decode} path="/desofuscador" />
+      <Route path="/editar/:id" render={() =>
+        isAuth() ? (
+          <Editar />
+        ) : (
+          <Redirect to="/" />
+        )
+      }/>
+      <Route path="/desofuscador" render={() =>
+        isAuth() ? (
+          <Decode />
+        ) : (
+          <Redirect to="/" />
+        )
+      }/>
     </BrowserRouter>
   );
 }

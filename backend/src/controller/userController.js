@@ -142,6 +142,7 @@ module.exports = {
       var [ { name } ] = userName
       var [ { email } ] = userEmail
       
+      
       bcrypt.compare(dados["senha"], senha)
         .then(result => {
           if(result) {

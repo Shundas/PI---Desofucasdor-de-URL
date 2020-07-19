@@ -28,7 +28,7 @@ export default function Home() {
 
     await api.post("/login", data).then((response) => { 
       login(response.data.token);
-      window.location.href = '/lista'
+      window.location.href = '/desofuscador'
       //setErros(response.data.erros);
     });     
   }
