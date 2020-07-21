@@ -4,12 +4,28 @@ import "./styles.css";
 import Header from '../../components/Header';
 import api from '../../services/api';
 import { login } from '../../utils/auth';
+import Alert from "react-bootstrap/Alert";
 
 export default function Home() {
+  
   const [loginData, setLoginData] = useState({
     email: "",
     senha: "",
   });
+
+  const [erros, setErros] = useState([
+    {
+      msg: "",
+    },
+  ]);
+
+  const [error, setError] = useState([
+    {
+      value: "",
+      msg: "",
+    },
+  ]);
+
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -28,8 +44,8 @@ export default function Home() {
 
     await api.post("/login", data).then((response) => { 
       login(response.data.token);
-      window.location.href = '/desofuscador'
-      //setErros(response.data.erros);
+      setErros(response.data.erros);
+      setError(response.data.error);      
     });     
   }
 
@@ -37,6 +53,34 @@ export default function Home() {
   return (
     <>
     <Header />
+
+    {
+      error.map((erro, id) =>
+        erro.msg === "" ? (
+          ""
+        ) : (
+        <Alert key={id} variant="danger">{erro.msg}</Alert>
+        )
+      )
+    }
+    {
+      erros.length === 0 && error.length === 0 ? (
+        window.location.href = '/desofuscador'
+      ) : (
+        ""
+      )
+    }
+        
+    {
+      erros.map((erro, id) =>
+        erro.msg === "" ? (
+          ""
+        ) :
+         (
+          <Alert key={id} variant="danger">{erro.msg}</Alert>
+        )
+      )
+    }
     <div className="login-form">
      <h2>Bem vindo ao Desofuscador</h2> 
       <h6>LOGIN</h6>
@@ -59,7 +103,7 @@ export default function Home() {
             onChange={handleInputChange}
           />
         </div>
-        <input type="submit" value="Entrar" class="login-btn active" ></input>
+        <input type="submit" value="Entrar" className="login-btn active" ></input>
         <div className="dont-have-account">
           Não possui uma conta?
           <Link to="/cadastro">

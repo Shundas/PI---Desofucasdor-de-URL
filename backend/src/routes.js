@@ -7,7 +7,12 @@ const auth = require('./auth');
 
 //Rota para login
 router.post('/app/login', [
-  check('email', 'Informe o e-mail').trim().escape().notEmpty(),
+  check('email', 'Informe o e-mail').trim()
+    .escape()
+    .notEmpty()
+    .bail()
+    .isEmail()
+    .withMessage('E-mail inválido'),
   check('senha', 'Informe a senha').trim().escape().notEmpty()
 ], userController.login)
 

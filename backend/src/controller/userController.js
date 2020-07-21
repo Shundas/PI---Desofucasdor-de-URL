@@ -153,18 +153,26 @@ module.exports = {
 
             return response.json({
               token: token,
+              erros: erros.array(),
+              error: []
             })
           } else {
-            return response.status(404).json({
+            const saida = {
+              erros: erros.array(),
               error: [{
                 value: '',
-                msg: 'Usuário e senha incorretos'
+                msg: 'E-mail ou senha incorretos'
               }]
-            })
+            }
+            return response.json(saida)
           }
         })
     } else {
-      return response.status(422).json(erros)
+      const saida = {
+        erros: erros.array(),
+        error: []
+      }
+      return response.json(saida)
     }
   },
 };
