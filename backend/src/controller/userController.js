@@ -88,26 +88,6 @@ module.exports = {
     return response.json(results);
   },
 
-   //Não vamos utilizar
-  //Buscar usuário específico --Verificar
-  async show(request, response, next) {
-    try {
-      const { name } = request.query;
-      const pesquisaUser = await knex("users").where(
-        "name",
-        "like",
-        `%${name}%`
-      );
-
-      if (!pesquisaUser) {
-        return response.json({ msg: "Usuário não encontrado" }); //verificar
-      } else {
-        return response.json(pesquisaUser);
-      }
-    } catch (error) {
-      next(error);
-    }
-  },
 
     // buscando unico user -- pelo ID
   async unique(request, response, next) {
@@ -134,13 +114,11 @@ module.exports = {
     const erros = validationResult(request);
 
     if(erros.isEmpty()) {
-      const userName = await knex("users").select("name").where('email', dados["email"])
-      const userEmail = await knex("users").select("email").where('email', dados["email"])
-      const userSenha = await knex("users").select("senha").where("email", dados["email"])
+      const userDados = await knex("users").select("*").where('email', dados["email"])
       
-      var [ { senha } ] = userSenha
-      var [ { name } ] = userName
-      var [ { email } ] = userEmail
+      var [ { senha } ] = userDados
+      var [ { name } ] = userDados
+      var [ { email } ] = userDados
       
       
       bcrypt.compare(dados["senha"], senha)

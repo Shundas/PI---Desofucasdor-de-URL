@@ -12,7 +12,16 @@ module.exports = {
       dest: 'upload_files/',
       fileFilter: (request, file, cb) => {
         if (file.mimetype != 'text/plain' && !file.mimetype.includes('log')) {
-          return cb(new Error('Formato de arquivo inválido'));
+          return response.send(`<body>
+          <style type="text/css">
+            body {
+              color:white;
+              background-color:#202020;
+            }
+          </style>
+            <h2>Erro</h2>
+            <div>Ops... Formato de arquivo inválido, a extensão precisa ser ".txt" ou ".log"!</div>
+        </body>`);
         }
         cb(null, true);
       },
@@ -29,14 +38,18 @@ module.exports = {
       } else {
         let file = request.file;
 
-        console.log(file)
-
-        const saida = {
-          erros: erros.array(),
-        };
-
         if(!file) {
-          return response.json(saida);
+          return response.send(`
+            <body>
+              <style type="text/css">
+                body {
+                  color:white;
+                  background-color:#202020;
+                }
+              </style>
+                <h2>Erro</h2>
+                <div>Ops... Arquivo vazio, por favor volte e anexe um arquivo!</div>
+            </body>`);
         }
 
         const path = await processFile(file);

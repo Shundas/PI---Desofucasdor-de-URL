@@ -21,7 +21,7 @@ router.post('/app/login', [
 router.post(
   '/app/upload',
   [check('attachment', 'File é um campo obrigatório').trim().escape().notEmpty()],
-  auth, decodeController.manipulaArquivo
+  decodeController.manipulaArquivo
 );
 
 //Rota para manipular string
@@ -33,9 +33,6 @@ router.post(
 
 //Buscar um único user pelo ID
 router.get('/app/:id', auth, userController.unique);
-
-//Buscar user pelo query params (nome e email)
-router.get('/app/show', userController.show);
 
 //Buscar todos os users
 router.get('/app', auth, userController.index);
